@@ -7,7 +7,6 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-KINDS = {'lecture', 'workshop', 'guide'}
 
 
 def build(root):
@@ -25,8 +24,8 @@ def build(root):
         for key in ('title', 'description'):
             if not isinstance(item.get(key), str) or not item[key].strip():
                 raise ValueError(f'{slug}: нужно поле {key}')
-        if item.get('type') not in KINDS:
-            raise ValueError(f'{slug}: type должен быть lecture, workshop или guide')
+        if not isinstance(item.get('outcomes'), list) or not 1 <= len(item['outcomes']) <= 5 or not all(isinstance(t, str) and t.strip() for t in item['outcomes']):
+            raise ValueError(f'{slug}: outcomes должен содержать 1–5 проверяемых действий')
         if not isinstance(item.get('tags'), list) or not all(isinstance(t, str) for t in item['tags']):
             raise ValueError(f'{slug}: tags должен быть списком строк')
         datetime.date.fromisoformat(item['added'])
@@ -39,11 +38,11 @@ def build(root):
             raise ValueError(f'{slug}: index.html отсутствует')
         if 'href="../../"' not in page.read_text(encoding='utf-8'):
             raise ValueError(f'{slug}: нужна ссылка в каталог href="../../"')
-        public = {key: item[key] for key in ('id', 'title', 'type', 'description', 'tags', 'added')}
+        public = {key: item[key] for key in ('id', 'title', 'description', 'outcomes', 'tags', 'added')}
         public.update(path=f'guides/{slug}/', note=item.get('note', 'Полный разбор и практика'))
         items.append((item.get('order', 1000), public))
     items.sort(key=lambda pair: (pair[0], -datetime.date.fromisoformat(pair[1]['added']).toordinal(), pair[1]['id']))
-    return json.dumps({'version': 1, 'items': [item for _, item in items]}, ensure_ascii=False, indent=2) + '\n'
+    return json.dumps({'version': 2, 'items': [item for _, item in items]}, ensure_ascii=False, indent=2) + '\n'
 
 
 def main():
