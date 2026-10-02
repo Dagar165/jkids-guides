@@ -47,9 +47,9 @@
     const l=instruction(id);
     let body=`<a class="return" href="#overview">← Маршрут и все темы</a><p class="eyebrow">${l?'Учебный раздел':'Источник и правила чтения'}</p><h1>${esc(title(id))}</h1>`;
     if(l){
-      body+=`<div class="panel goal"><strong>Какое действие тренируем</strong><p class="lead">${esc(l.outcome)}</p><h3>Зачем это в работе</h3><p>${esc(l.why)}</p></div><nav class="section-links" aria-label="Внутри темы"><a href="#terms">Понятия</a><a href="#lecture">Полный разбор</a><a href="#worked">Решение с объяснением</a><a href="#practice">Твоя задача</a><a href="#transfer">Применение в работе</a></nav><section class="panel" id="terms"><p class="eyebrow">База перед разбором</p><h2>Понятия простыми словами</h2><dl class="glossary">${l.terms.map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('')}</dl></section>`;
+      body+=`<div class="panel goal"><strong>Какое действие тренируем</strong><p class="lead">${esc(l.outcome)}</p><h3>Зачем это в работе</h3><p>${esc(l.why)}</p></div><nav class="section-links" aria-label="Внутри темы"><a href="#terms">Понятия</a><a href="#lecture">Полный разбор</a><a href="#worked">Решение с объяснением</a>${id===17?'<a href="#forms">Заполненные образцы</a>':''}<a href="#practice">Твоя задача</a><a href="#transfer">Применение в работе</a></nav><section class="panel" id="terms"><p class="eyebrow">База перед разбором</p><h2>Понятия простыми словами</h2><dl class="glossary">${l.terms.map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('')}</dl></section>`;
     }
-    const reference=`<section class="panel lecture" id="lecture"><p class="eyebrow">Полный материал из прежней версии</p><h2>${id===17?'Пустые бланки для своей работы':l?'Объяснение, случаи и оговорки лекции':'Содержание и границы источников'}</h2><p class="muted">Текст сохранён полностью. Внутри подписаны случаи лектора, редакторское применение и источники. Читай объяснение вместе с ограничениями примеров.</p>${sourceBlocks(id)}</section>`;
+    const reference=`<section class="panel lecture" id="lecture"><p class="eyebrow">Лекция и редакторская адаптация</p><h2>${id===17?'Пустые бланки для своей работы':l?'Объяснение, случаи и оговорки лекции':'Содержание и границы источников'}</h2><p class="muted">Здесь подписаны случаи лектора, редакторское применение и источники. Читай объяснение вместе с ограничениями примеров.</p>${sourceBlocks(id)}</section>`;
     if(id!==17) body+=reference;
     if(l){
       body+=`<section class="panel" id="worked"><p class="eyebrow">Учебная адаптация · ход решения</p><h2>Посмотри, как принимаем решение</h2>${[3,14,15,18].includes(id)?'':caseBlock()}<ol class="steps">${l.steps.map(([a,b])=>`<li><div><strong>${esc(a)}</strong><p>${esc(b)}</p></div></li>`).join('')}</ol><div class="compare"><div><small>Решение, которое не помогает</small><p>${esc(l.wrong)}</p></div><div><small>Обоснованный вариант</small><p>${esc(l.right)}</p></div></div></section>`;
@@ -82,11 +82,11 @@
     const match=location.hash.match(/^#lesson-(\d+)(?:-block-(\d+))?$/);
     if(match && source[Number(match[1])]){
       const id=Number(match[1]),key=`lesson-${id}`;
-      if(current!==key){lesson(id);current=key;window.scrollTo(0,0);main.focus({preventScroll:true});}
+      if(current!==key){lesson(id);current=key;window.scrollTo({top:0,behavior:'instant'});main.focus({preventScroll:true});}
       if(match[2]!==undefined) document.getElementById(`lesson-${id}-block-${match[2]}`)?.scrollIntoView();
       if(!matchMedia('(min-width:761px)').matches)nav.open=false;
     }else if(!location.hash||location.hash==='#overview'){
-      overview();current='overview';window.scrollTo(0,0);main.focus({preventScroll:true});
+      overview();current='overview';window.scrollTo({top:0,behavior:'instant'});main.focus({preventScroll:true});
       if(!matchMedia('(min-width:761px)').matches)nav.open=false;
     }else if(!current){overview();current='overview';}
     renderNav();
