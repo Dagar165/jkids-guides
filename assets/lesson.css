@@ -68,6 +68,19 @@ p{margin:0 0 12px}
 .fit ul{margin:0;padding-left:20px}.fit li{margin:4px 0}
 @media (min-width:700px){.fit{grid-template-columns:1fr 1fr}}
 
+/* Схема-сетка (например, Lean Canvas): <div class="canvas"><div class="cell"><b>1 · Проблема</b>…</div></div> */
+.canvas{display:grid;gap:8px;margin-top:14px}
+.cell{order:var(--n,0);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.45}
+.cell > b:first-child{display:block;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.cell ul{margin:0;padding-left:18px}.cell li{margin:2px 0}
+.cell.key{border-color:var(--blue);background:var(--blue-soft)}
+@media (min-width:760px){.canvas{grid-template-columns:repeat(5,1fr)}.cell{order:0}.cell.tall{grid-row:span 2}.cell.half{grid-column:span 5}.cell.wide{grid-column:span 2}.cell.wide3{grid-column:span 3}}
+
+/* Шаги цепочки */
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0;padding:0;list-style:none;font-size:15px}
+.steps li{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-weight:600}
+.steps li + li::before{content:"→";margin-right:8px;color:var(--muted);font-weight:400}
+
 /* Задания */
 .task{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-top:14px;transition:border-color .2s,background .2s}
 .task.done{border-color:var(--green);background:var(--green-soft)}
