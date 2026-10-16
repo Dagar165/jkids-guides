@@ -102,7 +102,7 @@
       navState();route();main.setAttribute('aria-busy','false');
       search.addEventListener('input',renderNav);window.addEventListener('hashchange',route);
       matchMedia('(min-width:761px)').addEventListener('change',e=>{nav.open=e.matches;});
-    }catch(_){main.setAttribute('aria-busy','false');main.innerHTML='<section class="panel"><h1>Методичка не загрузилась</h1><p>Проверь соединение и обнови страницу.</p><button class="button" id="reload">Попробовать снова</button><p><a href="../../">Все методички</a></p></section>';document.getElementById('reload').onclick=()=>location.reload();}
+    }catch(_){main.setAttribute('aria-busy','false');main.innerHTML='<section class="panel"><h1>Методичка не загрузилась</h1><p>Проверь соединение и обнови страницу.</p><button class="button" id="reload">Попробовать снова</button><p><a href="../../../">Все методички</a></p></section>';document.getElementById('reload').onclick=()=>location.reload();}
   }
   load();
 })();
