@@ -74,7 +74,7 @@ p{margin:0 0 12px}
 .cell > b:first-child{display:block;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
 .cell ul{margin:0;padding-left:18px}.cell li{margin:2px 0}
 .cell.key{border-color:var(--blue);background:var(--blue-soft)}
-@media (min-width:760px){.canvas{grid-template-columns:repeat(5,1fr)}.cell{order:0}.cell.tall{grid-row:span 2}.cell.half{grid-column:span 5}.cell.wide{grid-column:span 2}.cell.wide3{grid-column:span 3}}
+@media (min-width:760px){.canvas{grid-template-columns:repeat(5,1fr)}.cell{order:0}.cell.tall{grid-row:span 2}.cell.half{grid-column:span 5}.cell.wide{grid-column:span 2}.cell.wide3{grid-column:span 3}.canvas.two{grid-template-columns:1fr 1fr}}
 
 /* Шаги цепочки */
 .steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0;padding:0;list-style:none;font-size:15px}
