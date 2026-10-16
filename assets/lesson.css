@@ -81,6 +81,17 @@ p{margin:0 0 12px}
 .steps li{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-weight:600}
 .steps li + li::before{content:"→";margin-right:8px;color:var(--muted);font-weight:400}
 
+/* Калькулятор: <div class="calc"><label>…<input type="number"></label>…<output>…</output></div> */
+.calc{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-top:14px}
+.calc .fields{display:grid;gap:10px}
+.calc label{display:grid;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
+.calc input{font:inherit;font-size:17px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:46px;width:100%}
+.calc .res{display:grid;gap:8px;margin-top:16px}
+.calc .res div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:8px}
+.calc .res b{font-size:18px}
+.calc .res .big b{color:var(--green);font-size:22px}
+@media (min-width:600px){.calc .fields{grid-template-columns:1fr 1fr}}
+
 /* Задания */
 .task{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-top:14px;transition:border-color .2s,background .2s}
 .task.done{border-color:var(--green);background:var(--green-soft)}
