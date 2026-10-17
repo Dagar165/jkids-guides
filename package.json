@@ -1,0 +1,12 @@
+{
+  "name": "jkids-guides",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Статический учебник команды JKids",
+  "scripts": {
+    "build": "node scripts/build_site.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
